@@ -2,7 +2,7 @@ const UserModels = require('../models/users');
 
 const getAllUser = async (req, res) => {
     try {
-        const [rows] = await UserModels.getAllUser(); //menggunakan destrutur untuk mengambil data rows saja. default [rows, field]
+        const rows = await UserModels.getAllUser(); //menggunakan destrutur untuk mengambil data rows saja. default [rows, field]
 
         res.json({
             message: 'get user success',

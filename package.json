@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js"
+    "start": "nodemon index.js"
   },
   "author": "wahyu santoso",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "mysql2": "^3.10.0",
+    "mssql": "^11.0.1",
     "nodemon": "^3.1.2"
   }
 }
