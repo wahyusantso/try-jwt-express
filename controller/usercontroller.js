@@ -1,12 +1,14 @@
 const UserModels = require('../models/users');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const getAllUser = async (req, res) => {
     try {
-        const rows = await UserModels.getAllUser(); //menggunakan destrutur untuk mengambil data rows saja. default [rows, field]
+        const datas = await UserModels.getAllUser();
 
         res.json({
             message: 'get user success',
-            data: rows    
+            data: datas    
         });
     } catch (error) {
         //handle error
@@ -75,9 +77,25 @@ const deleteUser = async (req, res) => {
     }
 }
 
+const login = async (req, res) => {
+    const {body} = req;
+    try {
+        const secretKey= process.env.SECRET_KEY_TOKEN;
+        
+        //buat token ketika autentikasi berhasil
+        const token = jwt.sign({name: body.name}, secretKey, {expiresIn: '10m'}); //token expired in 10 minute. payload atau data yang disimpan bisa berupa user id, user name.
+        res.status(200).json({
+            token: token
+        });
+    } catch (error) {
+        res.status(500).json({message: 'login failed'});
+    }
+}
+
 module.exports = { 
     getAllUser, 
     createUser,
     updateUser,
-    deleteUser 
+    deleteUser,
+    login 
 }
